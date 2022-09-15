@@ -1,0 +1,12 @@
+{
+  "name": "hydronym",
+  "version": "0.0.1",
+  "description": "One repo to rule them all.",
+  "homepage": "https://github.com/Stassi/hydronym#readme",
+  "license": "MIT",
+  "author": "Andreas Stassivik <andreas@stassi.net> (https://github.com/Stassi)",
+  "repository": "github:Stassi/hydronym",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
