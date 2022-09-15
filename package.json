@@ -1,5 +1,6 @@
 {
   "name": "hydronym",
+  "private": true,
   "version": "0.0.1",
   "description": "One repo to rule them all.",
   "homepage": "https://github.com/Stassi/hydronym#readme",
