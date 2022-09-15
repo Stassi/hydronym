@@ -1,0 +1,11 @@
+{
+  "name": "arc4",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Stream cipher.",
+  "license": "MIT",
+  "author": "Andreas Stassivik <andreas@stassi.net> (https://github.com/Stassi)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
