@@ -33,7 +33,20 @@
     "root": true
   },
   "jest": {
-    "preset": "ts-jest/presets/default-esm"
+    "extensionsToTreatAsEsm": [".ts"],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "preset": "ts-jest/presets/default-esm",
+    "transform": {
+      "<regex_match_files": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
+
+    }
   },
   "prettier": {
     "endOfLine": "auto",
