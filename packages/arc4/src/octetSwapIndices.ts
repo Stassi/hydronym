@@ -5,7 +5,9 @@ export default function octetSwapIndices(
   x: number,
   y: number
 ): Uint8Array {
-  const [lowIndex, highIndex] = [...[x, y]].sort()
+  const [lowIndex, highIndex] = [...[x, y]].sort(
+    (a: number, b: number) => a - b
+  )
 
   return Uint8Array.from([
     ...o.subarray(0, lowIndex),
