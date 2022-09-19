@@ -10,7 +10,7 @@ export default function schedule(key: string): Uint8Array {
     { get: getStream, set: setStream } = useState(stream())
 
   forEachMaxUIntOctet((i: number): void => {
-    setRoundKey(getRoundKey().addTo(getStream().atIndex(i), atKeyIndex(i)))
+    setRoundKey(getRoundKey().addTo(atKeyIndex(i), getStream().atIndex(i)))
     setStream(getStream().swapIndices(i, getRoundKey().state))
   })
 
