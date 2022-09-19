@@ -1,4 +1,4 @@
-import divideBy from './arithmetic/divideBy.js'
+import { divideBy } from './arithmetic/division.js'
 import octetKey from './octet/key.js'
 import range from './octet/range.js'
 import { sum } from './arithmetic/addition.js'
