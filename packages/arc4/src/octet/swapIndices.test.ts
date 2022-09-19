@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
-import octetSwapIndices from './octetSwapIndices.js'
+import swapIndices from './swapIndices.js'
 
-describe('octetSwapIndices', () => {
+describe('octet swap indices', () => {
   describe('octet := [0, 40)', () => {
     const octet = Uint8Array.from([0, 10, 20, 30])
 
@@ -35,7 +35,7 @@ describe('octetSwapIndices', () => {
       'swap x: $x with y: $y',
       ({ x, y, expected }: { x: number; y: number; expected: number[] }) => {
         it(`should return ${expected}`, () => {
-          expect([...octetSwapIndices(octet, x, y)]).toStrictEqual(expected)
+          expect([...swapIndices(octet, x, y)]).toStrictEqual(expected)
         })
       }
     )

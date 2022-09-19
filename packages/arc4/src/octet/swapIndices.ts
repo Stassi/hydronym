@@ -1,13 +1,12 @@
-import increment from './increment.js'
+import { increment } from '../arithmetic/addition.js'
+import sortAscending from '../array/sortAscending.js'
 
-export default function octetSwapIndices(
+export default function swapIndices(
   o: Uint8Array,
   x: number,
   y: number
 ): Uint8Array {
-  const [lowIndex, highIndex] = [...[x, y]].sort(
-    (a: number, b: number) => a - b
-  )
+  const [lowIndex, highIndex] = sortAscending([x, y])
 
   return Uint8Array.from([
     ...o.subarray(0, lowIndex),

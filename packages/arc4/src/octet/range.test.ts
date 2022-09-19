@@ -1,12 +1,12 @@
 import { describe, expect, it } from '@jest/globals'
-import octetRange from './octetRange.js'
+import range from './range.js'
 
-describe('octetRange', () => {
+describe('octet range', () => {
   describe('input: 4', () => {
     const input = 4
 
     it(`should return integer interval [0 ... ${input})`, () => {
-      expect([...octetRange(input)]).toEqual([0, 1, 2, 3])
+      expect([...range(input)]).toEqual([0, 1, 2, 3])
     })
   })
 
@@ -14,7 +14,7 @@ describe('octetRange', () => {
     const input = 8
 
     it(`should return integer interval [0 ... ${input})`, () => {
-      expect([...octetRange(input)]).toEqual([
+      expect([...range(input)]).toEqual([
         0, 1, 2, 3, 4, 5, 6, 7,
       ])
     })
