@@ -1,5 +1,5 @@
 import { increment } from '../arithmetic/addition.js'
-import sortAscending from '../array/sortAscending.js'
+import { ascending as sortAscending } from '../array/sort.js'
 
 export default function swapIndices(
   o: Uint8Array,

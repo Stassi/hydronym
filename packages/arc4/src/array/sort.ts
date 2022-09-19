@@ -1,5 +1,5 @@
 import { subtract } from '../arithmetic/subtraction.js'
 
-export default function sortAscending(n: number[]): number[] {
+export function ascending(n: number[]): number[] {
   return n.sort(subtract)
 }
