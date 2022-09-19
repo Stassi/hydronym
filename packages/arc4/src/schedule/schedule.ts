@@ -1,22 +1,21 @@
 import indexedKey from './indexedKey.js'
+import stream from './stream.js'
 import { sum } from '../arithmetic/addition.js'
-import swapIndices from '../octet/swapIndices.js'
-import {
-  divideByMaxOctet,
-  forEachMaxUIntOctet,
-  maxUIntOctet,
-} from '../octet/maximumOctet.js'
+import { divideByMaxOctet, forEachMaxUIntOctet } from '../octet/maximumOctet.js'
 
 export default function schedule(key: string): Uint8Array {
   const atKeyIndex: (i: number) => number = indexedKey(key)
 
   let j = 0,
-    s: Uint8Array = maxUIntOctet
+    s = stream()
 
   forEachMaxUIntOctet((i: number) => {
-    j = divideByMaxOctet(sum(j, s[i], atKeyIndex(i)))
-    s = swapIndices(s, i, j)
+    const { atIndex: atStreamIndex, swapIndices: swapStreamIndices } = s
+
+    j = divideByMaxOctet(sum(j, atStreamIndex(i), atKeyIndex(i)))
+    s = swapStreamIndices(i, j)
   })
 
-  return s
+  const { state: streamState } = s
+  return streamState
 }
