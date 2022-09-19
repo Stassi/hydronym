@@ -1,12 +1,8 @@
 import { divideBy } from './arithmetic/division.js'
 import octetKey from './octet/key.js'
-import range from './octet/range.js'
 import { sum } from './arithmetic/addition.js'
 import swapIndices from './octet/swapIndices.js'
-
-const MAX_OCTET = 256,
-  divideByMaxOctet = divideBy(MAX_OCTET),
-  maxUIntOctet = range(MAX_OCTET)
+import { divideByMaxOctet, maxUIntOctet } from './octet/maximumOctet.js'
 
 export default function schedule(key: string): Uint8Array {
   const k = octetKey(key),
