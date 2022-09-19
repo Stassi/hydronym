@@ -2,7 +2,7 @@ import decodeKey from '../octet/decodeKey.js'
 import { divideBy } from '../arithmetic/division.js'
 import { length } from '../array/length.js'
 
-export function indexedKey(key: string): (i: number) => number {
+export default function indexedKey(key: string): (i: number) => number {
   const decoded = decodeKey(key),
     divideByLength = divideBy(length(decoded))
 

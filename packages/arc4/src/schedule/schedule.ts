@@ -1,4 +1,4 @@
-import { indexedKey } from './indexedKey.js'
+import indexedKey from './indexedKey.js'
 import { sum } from '../arithmetic/addition.js'
 import swapIndices from '../octet/swapIndices.js'
 import {
