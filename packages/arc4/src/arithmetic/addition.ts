@@ -3,7 +3,7 @@ function add(a: number, b: number) {
 }
 
 function addTo(a: number) {
-  return (b: number) => add(a, b)
+  return (b: number): number => add(a, b)
 }
 
 export const increment = addTo(1)
