@@ -6,7 +6,7 @@ type ScheduleRoundKey = {
   state: number
 }
 
-export function roundKey(state = 0): ScheduleRoundKey {
+export default function roundKey(state = 0): ScheduleRoundKey {
   return {
     state,
     addTo: function addTo(...n: number[]): ScheduleRoundKey {
