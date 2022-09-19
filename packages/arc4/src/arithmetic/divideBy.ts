@@ -1,3 +1,3 @@
 export default function divideBy(divisor: number) {
-  return (dividend: number) => dividend % divisor
+  return (dividend: number): number => dividend % divisor
 }
