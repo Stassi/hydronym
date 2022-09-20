@@ -16,7 +16,7 @@ describe('encode', () => {
       expected: [83, 101, 99, 114, 101, 116],
     },
   ])(
-    'key: $key',
+    'input: $input',
     ({ input, expected }: { input: string; expected: number[] }) => {
       it('should convert strings to octets', () => {
         expect([...encode(input)]).toStrictEqual(expected)
