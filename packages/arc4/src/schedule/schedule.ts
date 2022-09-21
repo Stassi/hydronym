@@ -1,4 +1,4 @@
-import { forEachMaxUIntOctet } from '../octet/maximumOctet.js'
+import { forEachPermutation } from '../octet/maximum.js'
 import indexedKey from './indexedKey.js'
 import roundKey from './roundKey.js'
 import stream from './stream.js'
@@ -9,7 +9,7 @@ export default function schedule(key: string): Uint8Array {
     { get: getRoundKey, set: setRoundKey } = useState(roundKey()),
     { get: getStream, set: setStream } = useState(stream())
 
-  forEachMaxUIntOctet((i: number): void => {
+  forEachPermutation((i: number): void => {
     setRoundKey(getRoundKey().addTo(atKeyIndex(i), getStream().atIndex(i)))
     setStream(getStream().swapIndices(i, getRoundKey().state))
   })

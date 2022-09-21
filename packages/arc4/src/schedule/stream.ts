@@ -1,4 +1,4 @@
-import { maxUIntOctet } from '../octet/maximumOctet.js'
+import { permutation } from '../octet/maximum.js'
 import swapIndices from '../octet/swapIndices.js'
 
 type ScheduleStream = {
@@ -7,7 +7,7 @@ type ScheduleStream = {
   swapIndices: (x: number, y: number) => ScheduleStream
 }
 
-export default function stream(state: Uint8Array = maxUIntOctet): ScheduleStream {
+export default function stream(state: Uint8Array = permutation): ScheduleStream {
   return {
     state,
     atIndex: function (i: number): number {
