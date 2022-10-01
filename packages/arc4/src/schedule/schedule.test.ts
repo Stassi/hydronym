@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
-import { ascending } from '../array/sort.js'
 import { permutation } from '../octet/maximum.js'
 import schedule from './schedule.js'
+import { ascending as sortAscending } from '../array/sort.js'
 
 describe('schedule', () => {
   describe.each([
@@ -81,7 +81,7 @@ describe('schedule', () => {
       })
 
       it('should return an unsorted octet identity permutation', () => {
-        expect(ascending([...result])).toStrictEqual([...permutation])
+        expect(sortAscending([...result])).toStrictEqual([...permutation])
       })
     }
   )
