@@ -8,4 +8,4 @@ export const truncate: (dividend: number) => number = divideBy(MAX_OCTET)
 
 export const permutation: Uint8Array = range(MAX_OCTET)
 
-export const strictEquals: (n: number) => boolean = strictEquality(MAX_OCTET)
+export const strictEquals = (n: number): boolean => strictEquality(MAX_OCTET, n)
