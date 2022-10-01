@@ -14,8 +14,8 @@ const DEFAULT_NUMBER = 0
 type ScheduleRoundState = {
   i: number
   j: number
-  phase: number
   s: Uint8Array
+  subRound: number
 }
 
 type ScheduleRound = {
@@ -30,11 +30,11 @@ export default function round(
   state: ScheduleRoundState = {
     i: DEFAULT_NUMBER,
     j: DEFAULT_NUMBER,
-    phase: DEFAULT_NUMBER,
     s: permutation,
+    subRound: DEFAULT_NUMBER,
   }
 ): ScheduleRound {
-  const { i, j, phase, s } = state,
+  const { i, j, s, subRound } = state,
     mutators: (() => Partial<ScheduleRoundState>)[] = [
       () => ({
         j: truncateMaxOctet(sum(j, s[i], atKeyIndex(i))),
@@ -56,8 +56,8 @@ export default function round(
     next(): ScheduleRound {
       return round(key, atKeyIndex, {
         ...state,
-        ...mutators[phase](),
-        phase: truncateMutators(increment(phase)),
+        ...mutators[subRound](),
+        subRound: truncateMutators(increment(subRound)),
       })
     },
   }
