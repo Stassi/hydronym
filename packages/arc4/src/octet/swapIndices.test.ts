@@ -18,6 +18,11 @@ describe('octet swap indices', () => {
       },
       {
         x: 1,
+        y: 1,
+        expected: [0, 1, 2, 3],
+      },
+      {
+        x: 1,
         y: 2,
         expected: [0, 2, 1, 3],
       },
