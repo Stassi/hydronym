@@ -10,11 +10,11 @@ import {
 } from '../octet/maximum.js'
 
 type ScheduleRoundState = {
+  complete: boolean
   s: Uint8Array
 } & Record<'i' | 'j' | 'subRound', number>
 
 type ScheduleRound = {
-  isComplete: () => boolean
   next: () => ScheduleRound
   state: ScheduleRoundState
 }
@@ -25,6 +25,7 @@ export default function round(
   key: string,
   atKeyIndex = indexedKey(key),
   state: ScheduleRoundState = {
+    complete: false,
     i: DEFAULT_NUMBER,
     j: DEFAULT_NUMBER,
     s: permutation,
@@ -47,13 +48,11 @@ export default function round(
 
   return {
     state,
-    isComplete(): boolean {
-      return strictEqualsMaxOctet(i)
-    },
     next(): ScheduleRound {
       return round(key, atKeyIndex, {
         ...state,
         ...mutators[subRound](),
+        complete: strictEqualsMaxOctet(i),
         subRound: truncateMutators(increment(subRound)),
       })
     },
