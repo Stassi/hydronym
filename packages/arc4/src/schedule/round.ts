@@ -9,20 +9,17 @@ import {
   truncate as truncateMaxOctet,
 } from '../octet/maximum.js'
 
-const DEFAULT_NUMBER = 0
-
 type ScheduleRoundState = {
-  i: number
-  j: number
   s: Uint8Array
-  subRound: number
-}
+} & Record<'i' | 'j' | 'subRound', number>
 
 type ScheduleRound = {
   isComplete: () => boolean
   next: () => ScheduleRound
   state: ScheduleRoundState
 }
+
+const DEFAULT_NUMBER = 0
 
 export default function round(
   key: string,
