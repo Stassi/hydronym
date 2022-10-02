@@ -1,6 +1,9 @@
+import and from '../logic/conjunction.js'
 import { divideBy } from '../arithmetic/division.js'
 import indexedKey from './indexedKey.js'
 import { length } from '../array/length.js'
+import strictEquality from '../logic/strictEquality.js'
+import { subtractFrom } from '../arithmetic/subtraction.js'
 import swapIndices from '../octet/swapIndices.js'
 import { increment, sum } from '../arithmetic/addition.js'
 import {
@@ -19,7 +22,8 @@ type ScheduleRound = {
   state: ScheduleRoundState
 }
 
-const DEFAULT_NUMBER = 0
+const DEFAULT_NUMBER = 0,
+  subtractTwoFrom: (minuend: number) => number = subtractFrom(2)
 
 export default function round(
   key: string,
@@ -44,7 +48,8 @@ export default function round(
         i: increment(i),
       }),
     ],
-    truncateMutators: (dividend: number) => number = divideBy(length(mutators))
+    mutatorsLength = length(mutators),
+    truncateMutators: (dividend: number) => number = divideBy(mutatorsLength)
 
   return {
     state,
@@ -52,7 +57,10 @@ export default function round(
       return round(key, atKeyIndex, {
         ...state,
         ...mutators[subRound](),
-        complete: strictEqualsMaxOctet(i),
+        complete: and(
+          strictEqualsMaxOctet(increment(i)),
+          strictEquality(subRound, subtractTwoFrom(mutatorsLength))
+        ),
         subRound: truncateMutators(increment(subRound)),
       })
     },
