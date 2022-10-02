@@ -1,6 +1,6 @@
 import { increment } from '../arithmetic/addition.js'
 import { ascending as sortAscending } from '../array/sort.js'
-import strictEquality from '../equality/strict.js'
+import strictEquality from '../logic/strictEquality.js'
 
 export default function swapIndices(
   o: Uint8Array,

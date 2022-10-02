@@ -1,6 +1,6 @@
 import { divideBy } from '../arithmetic/division.js'
 import range from './range.js'
-import strictEquality from '../equality/strict.js'
+import strictEquality from '../logic/strictEquality.js'
 
 const MAX_OCTET = 256
 
