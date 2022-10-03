@@ -1,3 +1,5 @@
+import and from '../logic/conjunction.js'
+import { decrement } from '../arithmetic/subtraction.js'
 import { divideBy } from '../arithmetic/division.js'
 import { length } from '../array/length.js'
 import schedule from '../schedule/schedule.js'
@@ -61,7 +63,10 @@ export default function round(
         {
           ...state,
           ...mutators[subRound](),
-          complete: strictEquality(count, length(k)),
+          complete: and(
+            strictEquality(decrement(count), length(k)),
+            strictEquality(subRound, decrement(mutatorsLength))
+          ),
           subRound: truncateMutators(increment(subRound)),
         }
       )
