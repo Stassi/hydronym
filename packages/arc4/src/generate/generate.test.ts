@@ -5,11 +5,6 @@ describe('generate octets', () => {
   describe.each([
     {
       key: 'Key',
-      count: 0,
-      expected: [],
-    },
-    {
-      key: 'Key',
       count: 10,
       expected: [235, 159, 119, 129, 183, 52, 202, 114, 167, 25],
     },
@@ -44,4 +39,15 @@ describe('generate octets', () => {
       })
     }
   )
+
+  describe('key: "Key", count: 0', () => {
+    it('should throw a range underflow error', () => {
+      expect(() => [
+        ...generateOctets({
+          count: 0,
+          key: 'Key',
+        }),
+      ]).toThrow()
+    })
+  })
 })
