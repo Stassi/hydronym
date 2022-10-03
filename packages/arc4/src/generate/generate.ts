@@ -1,7 +1,7 @@
 import { length } from '../array/length.js'
 import schedule from '../schedule/schedule.js'
-import swapIndices from './swapIndices.js'
-import { truncate as truncateMaxOctet } from './maximum.js'
+import swapIndices from '../octet/swapIndices.js'
+import { truncate as truncateMaxOctet } from '../octet/maximum.js'
 import { add, increment } from '../arithmetic/addition.js'
 
 export default function generate({
