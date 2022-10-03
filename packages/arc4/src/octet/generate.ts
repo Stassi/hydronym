@@ -2,7 +2,7 @@ import { length } from '../array/length.js'
 import schedule from '../schedule/schedule.js'
 import swapIndices from './swapIndices.js'
 
-export default function generateOctets({
+export default function generate({
   count,
   key,
 }: {

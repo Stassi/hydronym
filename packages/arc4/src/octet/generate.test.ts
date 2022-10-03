@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals'
-import generateOctets from './generateOctets.js'
+import generateOctets from './generate.js'
 
 describe('generate octets', () => {
   describe.each([
