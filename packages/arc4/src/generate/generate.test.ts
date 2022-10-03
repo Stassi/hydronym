@@ -34,7 +34,7 @@ describe('generate octets', () => {
       key: string
       expected: number[]
     }) => {
-      it('should generate a pseudorandom octet', () => {
+      it('should generate pseudorandom octets of a given length', () => {
         expect([
           ...generateOctets({
             count,
