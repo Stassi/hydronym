@@ -2,7 +2,7 @@ import not from '../logic/negate.js'
 import round from './round.js'
 import useState from '../state/useState.js'
 
-export default function generate({
+export default function keystream({
   count,
   key,
 }: {

@@ -8,14 +8,14 @@ import swapIndices from '../octet/swapIndices.js'
 import { truncate as truncateMaxOctet } from '../octet/maximum.js'
 import { add, increment } from '../arithmetic/addition.js'
 
-type GeneratorRoundState = {
+type KeystreamRoundState = {
   complete: boolean
 } & Record<'i' | 'j' | 'subRound', number> &
   Record<'k' | 's', Uint8Array>
 
-type GeneratorRound = {
-  next: () => GeneratorRound
-  state: GeneratorRoundState
+type KeystreamRound = {
+  next: () => KeystreamRound
+  state: KeystreamRoundState
 }
 
 const DEFAULT_NUMBER = 0
@@ -28,7 +28,7 @@ export default function round(
     count: number
     key: string
   },
-  state: GeneratorRoundState = {
+  state: KeystreamRoundState = {
     complete: false,
     i: DEFAULT_NUMBER,
     j: DEFAULT_NUMBER,
@@ -36,9 +36,9 @@ export default function round(
     s: schedule(key),
     subRound: DEFAULT_NUMBER,
   }
-): GeneratorRound {
+): KeystreamRound {
   const { i, j, k, s, subRound } = state,
-    mutators: (() => Partial<GeneratorRoundState>)[] = [
+    mutators: (() => Partial<KeystreamRoundState>)[] = [
       () => ({
         i: truncateMaxOctet(increment(i)),
       }),
@@ -57,7 +57,7 @@ export default function round(
 
   return {
     state,
-    next(): GeneratorRound {
+    next(): KeystreamRound {
       return round(
         { count, key },
         {

@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
-import generateOctets from './generate.js'
+import keystream from './keystream.js'
 
-describe('generate octets', () => {
+describe('keystream', () => {
   describe.each([
     {
       key: 'Key',
@@ -31,7 +31,7 @@ describe('generate octets', () => {
     }) => {
       it('should generate pseudorandom octets of a given length', () => {
         expect([
-          ...generateOctets({
+          ...keystream({
             count,
             key,
           }),
@@ -43,7 +43,7 @@ describe('generate octets', () => {
   describe('key: "Key", count: 0', () => {
     it('should throw a range underflow error', () => {
       expect(() => [
-        ...generateOctets({
+        ...keystream({
           count: 0,
           key: 'Key',
         }),
