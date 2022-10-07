@@ -1,8 +1,8 @@
 import { describe, expect, it } from '@jest/globals'
-import { permutation } from './maximum.js'
+import { permutation } from '../octet/maximum.js'
 import { decode, encode } from './transcode.js'
 
-describe('transcode', () => {
+describe('transcode Latin-1 (ISO-8859)', () => {
   describe.each([
     {
       latin1: 'Key',
