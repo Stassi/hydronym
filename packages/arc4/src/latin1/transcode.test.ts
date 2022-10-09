@@ -26,7 +26,7 @@ describe('transcode Latin-1 (ISO-8859)', () => {
     ({ latin1, octets }: { latin1: string; octets: number[] }) => {
       describe('decode', () => {
         it('should convert octets to a string', () => {
-          expect(decode(Uint8Array.from(octets))).toStrictEqual(latin1)
+          expect(decode(Uint8Array.from(octets))).toBe(latin1)
         })
       })
 
