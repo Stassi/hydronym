@@ -1,5 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
-import encrypt from './encrypt.js'
+import transcode from '../binary/transcode.js'
+import transcrypt from './transcrypt.js'
 
 describe('encrypt', () => {
   describe.each([
@@ -28,7 +29,15 @@ describe('encrypt', () => {
       expected: number[]
     } & Record<'key' | 'plaintext', string>) => {
       it('should return known ciphertext', () => {
-        expect([...encrypt({ key, plaintext })]).toStrictEqual(expected)
+        expect([
+          ...transcrypt({
+            key: transcode({ encoding: 'latin1', text: key }).toUInt8Array(),
+            text: transcode({
+              encoding: 'latin1',
+              text: plaintext,
+            }).toUInt8Array(),
+          }),
+        ]).toStrictEqual(expected)
       })
     }
   )

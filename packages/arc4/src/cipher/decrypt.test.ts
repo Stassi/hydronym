@@ -1,5 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
-import decrypt from './decrypt.js'
+import transcode from '../binary/transcode.js'
+import transcrypt from './transcrypt.js'
 
 describe('decrypt', () => {
   describe.each([
@@ -30,9 +31,14 @@ describe('decrypt', () => {
       expected: string
     }) => {
       it('should return known plaintext', () => {
-        expect(decrypt({ key, ciphertext: Uint8Array.from(ciphertext) })).toBe(
-          expected
-        )
+        expect(
+          transcode(
+            transcrypt({
+              key: transcode({ encoding: 'latin1', text: key }).toUInt8Array(),
+              text: Uint8Array.from(ciphertext),
+            })
+          ).toLatin1()
+        ).toBe(expected)
       })
     }
   )
