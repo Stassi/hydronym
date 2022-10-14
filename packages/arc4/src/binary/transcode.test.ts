@@ -1,7 +1,7 @@
 import type { BinaryStringEncoding, BinaryTranscoder } from './transcode.js'
 import { describe, expect, it } from '@jest/globals'
 import { permutation } from '../octet/maximum.js'
-import transcode, { fromLatin1 } from './transcode.js'
+import transcode, { fromHex, fromLatin1 } from './transcode.js'
 
 describe('binary transcoder', () => {
   describe.each([
@@ -41,7 +41,11 @@ describe('binary transcoder', () => {
           transcoder: transcode(octets),
         },
         {
-          name: 'hex',
+          name: 'hex alias',
+          transcoder: fromHex(hex),
+        },
+        {
+          name: 'hex explicit',
           transcoder: transcode({
             encoding: 'hex',
             text: hex,
