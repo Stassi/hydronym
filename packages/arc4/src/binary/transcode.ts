@@ -43,3 +43,7 @@ export default function transcode(
     },
   }
 }
+
+export function fromLatin1(text: string): BinaryTranscoder {
+  return transcode({ text, encoding: 'latin1' })
+}
