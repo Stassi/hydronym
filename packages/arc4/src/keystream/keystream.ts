@@ -1,6 +1,9 @@
 import not from '../logic/negate.js'
 import round from './round.js'
+import { strictEquals } from '../logic/strictEquality.js'
 import useState from '../state/useState.js'
+
+const strictEqualsZero: (n: number) => boolean = strictEquals(0)
 
 export default function keystream({
   count,
@@ -9,7 +12,7 @@ export default function keystream({
   count: number
   key: Uint8Array
 }): Uint8Array {
-  if (count < 1) throw new RangeError('Count must exceed 0')
+  if (strictEqualsZero(count)) return Uint8Array.from([])
 
   const { get: getRound, set: setRound } = useState(round({ count, key }))
 
