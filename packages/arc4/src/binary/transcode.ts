@@ -9,6 +9,9 @@ export type BinaryTranscoder = {
   toUInt8Array(): Uint8Array
 }
 
+const HEX = 'hex',
+  LATIN_1 = 'latin1'
+
 export default function transcode(
   param:
     | number[]
@@ -25,8 +28,8 @@ export default function transcode(
       ).toString(encoding)
 
   return {
-    toHex: toString('hex'),
-    toLatin1: toString('latin1'),
+    toHex: toString(HEX),
+    toLatin1: toString(LATIN_1),
     toArray(): number[] {
       return paramIsUInt8
         ? [...param]
@@ -44,6 +47,11 @@ export default function transcode(
   }
 }
 
-export function fromLatin1(text: string): BinaryTranscoder {
-  return transcode({ text, encoding: 'latin1' })
+function fromString(encoding: BinaryStringEncoding) {
+  return (text: string): BinaryTranscoder => transcode({ encoding, text })
 }
+
+export const fromHex: (text: string) => BinaryTranscoder = fromString(HEX)
+
+export const fromLatin1: (text: string) => BinaryTranscoder =
+  fromString(LATIN_1)
