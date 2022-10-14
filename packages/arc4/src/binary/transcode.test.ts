@@ -1,3 +1,4 @@
+import type { BinaryStringEncoding, BinaryTranscoder } from './transcode.js'
 import { describe, expect, it } from '@jest/globals'
 import { permutation } from '../octet/maximum.js'
 import transcode from './transcode.js'
@@ -33,7 +34,7 @@ describe('binary transcoder', () => {
       octets,
     }: {
       octets: number[]
-    } & Record<'hex' | 'latin1', string>) => {
+    } & Record<BinaryStringEncoding, string>) => {
       describe.each([
         {
           name: 'array',
@@ -63,12 +64,7 @@ describe('binary transcoder', () => {
           transcoder: { toArray, toHex, toLatin1, toUInt8Array },
         }: {
           name: string
-          transcoder: {
-            toArray(): number[]
-            toHex(): string
-            toLatin1(): string
-            toUInt8Array(): Uint8Array
-          }
+          transcoder: BinaryTranscoder
         }) => {
           describe('toArray()', () => {
             it('should return an untyped array', () => {
