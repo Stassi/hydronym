@@ -26,7 +26,7 @@ export default function round(
     key,
   }: {
     count: number
-    key: string
+    key: Uint8Array
   },
   state: KeystreamRoundState = {
     complete: false,

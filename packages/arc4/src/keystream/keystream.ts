@@ -7,7 +7,7 @@ export default function keystream({
   key,
 }: {
   count: number
-  key: string
+  key: Uint8Array
 }): Uint8Array {
   if (count < 1) throw new RangeError('Count must exceed 0')
 

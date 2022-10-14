@@ -1,5 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
 import keystream from './keystream.js'
+import transcode from '../binary/transcode.js'
 
 describe('keystream', () => {
   describe.each([
@@ -33,7 +34,7 @@ describe('keystream', () => {
         expect([
           ...keystream({
             count,
-            key,
+            key: transcode({ encoding: 'latin1', text: key }).toUInt8Array(),
           }),
         ]).toStrictEqual(expected)
       })
@@ -45,7 +46,7 @@ describe('keystream', () => {
       expect(() => [
         ...keystream({
           count: 0,
-          key: 'Key',
+          key: transcode({ encoding: 'latin1', text: 'Key' }).toUInt8Array(),
         }),
       ]).toThrow()
     })

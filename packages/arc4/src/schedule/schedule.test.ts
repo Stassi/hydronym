@@ -2,6 +2,7 @@ import { describe, expect, it } from '@jest/globals'
 import { permutation } from '../octet/maximum.js'
 import schedule from './schedule.js'
 import { ascending as sortAscending } from '../array/sort.js'
+import transcode from '../binary/transcode.js'
 
 describe('schedule', () => {
   describe.each([
@@ -74,7 +75,9 @@ describe('schedule', () => {
   ])(
     'key: "$key"',
     ({ key, expected }: { key: string; expected: number[] }) => {
-      const result: Uint8Array = schedule(key)
+      const result: Uint8Array = schedule(
+        transcode({ encoding: 'latin1', text: key }).toUInt8Array()
+      )
 
       it('should return a deterministic octet sequence', () => {
         expect([...result]).toStrictEqual(expected)

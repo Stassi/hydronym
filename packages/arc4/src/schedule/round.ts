@@ -26,7 +26,7 @@ const DEFAULT_NUMBER = 0,
   subtractTwoFrom: (minuend: number) => number = subtractFrom(2)
 
 export default function round(
-  key: string,
+  key: Uint8Array,
   atKeyIndex = indexedKey(key),
   state: ScheduleRoundState = {
     complete: false,
