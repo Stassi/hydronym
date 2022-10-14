@@ -1,5 +1,5 @@
-import { decode as decodeLatin1 } from '../latin1/transcode.js'
 import encrypt from './encrypt.js'
+import transcode from '../binary/transcode.js'
 
 export default function decrypt({
   ciphertext,
@@ -8,10 +8,10 @@ export default function decrypt({
   ciphertext: Uint8Array
   key: string
 }): string {
-  return decodeLatin1(
+  return transcode(
     encrypt({
       key,
-      plaintext: decodeLatin1(ciphertext),
+      plaintext: transcode(ciphertext).toLatin1(),
     })
-  )
+  ).toLatin1()
 }
