@@ -5,6 +5,11 @@ import encrypt from './encrypt.js'
 import transcrypt from './transcrypt.js'
 import transcode, { fromHex, fromLatin1 } from '../binary/transcode.js'
 
+type TranscryptionTest = {
+  actual(): string
+  name: string
+}
+
 describe('cipher', () => {
   describe.each([
     {
@@ -29,56 +34,56 @@ describe('cipher', () => {
       key,
       plaintext,
     }: Record<'ciphertext' | 'key' | 'plaintext', string>) => {
-      describe('decryption', () => {
-        describe('cipher()', () => {
-          it('should decrypt ciphertext to plaintext', () => {
-            expect(cipher(key).decrypt(ciphertext)).toBe(plaintext)
-          })
-        })
-
-        describe('decrypt()', () => {
-          it('should decrypt ciphertext to plaintext', () => {
-            expect(decrypt({ ciphertext, key })).toBe(plaintext)
-          })
-        })
-
-        describe('transcrypt()', () => {
-          it('should decrypt ciphertext to plaintext', () => {
-            expect(
-              transcode(
-                transcrypt({
-                  key: fromLatin1(key).toUInt8Array(),
-                  text: fromHex(ciphertext).toUInt8Array(),
-                })
-              ).toLatin1()
-            ).toBe(plaintext)
-          })
-        })
-      })
-
       describe('encryption', () => {
-        describe('cipher()', () => {
-          it('should encrypt plaintext to ciphertext', () => {
-            expect(cipher(key).encrypt(plaintext)).toBe(ciphertext)
-          })
-        })
-
-        describe('encrypt()', () => {
-          it('should encrypt plaintext to ciphertext', () => {
-            expect(encrypt({ key, plaintext })).toBe(ciphertext)
-          })
-        })
-
-        describe('transcrypt()', () => {
-          it('should encrypt plaintext to ciphertext', () => {
-            expect(
+        describe.each([
+          {
+            name: 'cipher()',
+            actual: () => cipher(key).encrypt(plaintext),
+          },
+          {
+            name: 'encrypt()',
+            actual: () => encrypt({ key, plaintext }),
+          },
+          {
+            name: 'transcrypt()',
+            actual: () =>
               transcode(
                 transcrypt({
                   key: fromLatin1(key).toUInt8Array(),
                   text: fromLatin1(plaintext).toUInt8Array(),
                 })
-              ).toHex()
-            ).toBe(ciphertext)
+              ).toHex(),
+          },
+        ])('$name', ({ actual }: TranscryptionTest) => {
+          it('should encrypt plaintext to ciphertext', () => {
+            expect(actual()).toBe(ciphertext)
+          })
+        })
+      })
+
+      describe('decryption', () => {
+        describe.each([
+          {
+            name: 'cipher()',
+            actual: () => cipher(key).decrypt(ciphertext),
+          },
+          {
+            name: 'decrypt()',
+            actual: () => decrypt({ ciphertext, key }),
+          },
+          {
+            name: 'transcrypt()',
+            actual: () =>
+              transcode(
+                transcrypt({
+                  key: fromLatin1(key).toUInt8Array(),
+                  text: fromHex(ciphertext).toUInt8Array(),
+                })
+              ).toLatin1(),
+          },
+        ])('$name', ({ actual }: TranscryptionTest) => {
+          it('should decrypt ciphertext to plaintext', () => {
+            expect(actual()).toBe(plaintext)
           })
         })
       })
