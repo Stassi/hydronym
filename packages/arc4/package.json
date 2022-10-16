@@ -5,6 +5,7 @@
   "description": "Stream cipher.",
   "license": "MIT",
   "author": "Andreas Stassivik <andreas@stassi.net> (https://github.com/Stassi)",
+  "sideEffects": false,
   "type": "module",
   "scripts": {
     "test": "jest"
