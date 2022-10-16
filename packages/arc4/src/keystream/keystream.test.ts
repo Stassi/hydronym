@@ -1,28 +1,28 @@
 import { describe, expect, it } from '@jest/globals'
-import { fromLatin1 } from '../binary/transcode.js'
 import keystream from './keystream.js'
+import transcode, { fromLatin1 } from '../binary/transcode.js'
 
 describe('keystream', () => {
   describe.each([
     {
       key: 'Key',
       count: 0,
-      expected: [],
+      expected: '',
     },
     {
       key: 'Key',
       count: 10,
-      expected: [235, 159, 119, 129, 183, 52, 202, 114, 167, 25],
+      expected: 'eb9f7781b734ca72a719',
     },
     {
       key: 'Wiki',
       count: 6,
-      expected: [96, 68, 219, 109, 65, 183],
+      expected: '6044db6d41b7',
     },
     {
       key: 'Secret',
       count: 8,
-      expected: [4, 212, 107, 5, 60, 168, 123, 89],
+      expected: '04d46b053ca87b59',
     },
   ])(
     'key: "$key", count: $count',
@@ -33,15 +33,17 @@ describe('keystream', () => {
     }: {
       count: number
       key: string
-      expected: number[]
+      expected: string
     }) => {
       it('should generate pseudorandom octets of a given length', () => {
-        expect([
-          ...keystream({
-            count,
-            key: fromLatin1(key).toUInt8Array(),
-          }),
-        ]).toStrictEqual(expected)
+        expect(
+          transcode(
+            keystream({
+              count,
+              key: fromLatin1(key).toUInt8Array(),
+            })
+          ).toHex()
+        ).toBe(expected)
       })
     }
   )
