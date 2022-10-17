@@ -1,7 +1,7 @@
 {
   "name": "@stassi/binary-transcoder",
   "version": "0.0.1",
-  "description": "Encode and decode binary data. Supports multiple common encodings.",
+  "description": "Encode and decode binary data with multiple common encodings.",
   "keywords": [
     "8-bit",
     "binary",
