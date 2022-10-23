@@ -23,13 +23,19 @@
   "license": "MIT",
   "author": "Andreas Stassivik <andreas@stassi.net>",
   "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "main": "dist/binaryTranscoder.mjs",
   "publishConfig": {
     "access": "public"
   },
   "type": "module",
+  "types": "dist/index.d.ts",
   "repository": "github:Stassi/hydronym",
   "scripts": {
     "build": "webpack",
+    "prepublishOnly": "npm run build",
     "test": "jest"
   },
   "devDependencies": {
