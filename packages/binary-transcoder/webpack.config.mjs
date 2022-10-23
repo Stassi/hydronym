@@ -3,8 +3,6 @@ import NodePolyfillPlugin from 'node-polyfill-webpack-plugin'
 import TerserPlugin from 'terser-webpack-plugin'
 import path, { dirname } from 'node:path'
 
-const PACKAGE_NAME = 'binaryTranscoder'
-
 export default {
   devtool: 'inline-source-map',
   entry: './src/index.ts',
@@ -23,7 +21,7 @@ export default {
     minimizer: [new TerserPlugin({ extractComments: false })]
   },
   output: {
-    filename: `${PACKAGE_NAME}.js`,
+    filename: 'binaryTranscoder.mjs',
     library: { type: 'module' },
     path: path.resolve(dirname(fileURLToPath(import.meta.url)), 'dist')
   },
